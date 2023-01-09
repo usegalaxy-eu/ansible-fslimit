@@ -10,6 +10,9 @@ Variables:
 
 - `ulimit_fsize_hard`: the hard limit in *bytes* (default value amounts to 1 TiB)
 
+This role uses the "ulimit" interface (the actual syscall is `setrlimit(2)`)
+which imposes limits *per process* that are inherited by child processes.
+
 When exceeding the soft limit, a process will receive `SIGXFSZ`
 (terminating the process by default, but the signal can be caught).
 
