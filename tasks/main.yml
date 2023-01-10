@@ -1,8 +1,13 @@
 ---
 
+- name: create systemd customization dir for selected unit
+  file:
+    path: /etc/systemd/system/{{ ulimit_fsize_unit }}.d
+    state: directory
+
 - name: set max file sizes for selected unit (via ulimit(1))
   template:
-   src: "ulimit-fsize.conf.j2"
-   dest: "/etc/systemd/system/{{ ulimit_fsize_unit }}.d/ulimit-fsize.conf"
+    src: ulimit-fsize.conf.j2
+    dest: /etc/systemd/system/{{ ulimit_fsize_unit }}.d/ulimit-fsize.conf
 
 ...
