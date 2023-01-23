@@ -19,3 +19,24 @@ When exceeding the soft limit, a process will receive `SIGXFSZ`
 An unprivileged process may raise its soft limit up to the hard limit,
 raising the hard limit is a privileged operation.
 
+
+### Sample requirements.yml
+
+    ---
+    roles:
+      - name: usegalaxy-eu.fslimit
+        src: https://github.com/usegalaxy-eu/ansible-fslimit
+        version: main
+
+### Example Playbook
+
+    ---
+    - name: Set file size limits for condor service unit
+      hosts: all
+      roles:
+        - role: usegalaxy-eu.fslimit
+          become: yes
+          vars:
+            ulimit_fsize_unit: "condor.service"
+            ulimit_fsize_soft: 268435456000
+            ulimit_fsize_hard: 1073741824000
